@@ -1,0 +1,150 @@
+easy_admin:
+  design:
+    form_theme:
+      - '@EasyAdmin/form/bootstrap_4.html.twig'
+      - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
+    menu:
+      - { entity: 'AboutMe', label: 'Sobre mí' }
+      - { entity: 'YearData', label: 'Datos del año' }
+      - { entity: 'CurrentProjects', label: 'Proyectos en marcha' }
+      - { entity: 'Notices', label: 'Noticias' }
+
+      - label: 'Media'
+        icon: 'newspaper'
+        children:
+          - { entity: 'Tags', label: 'Tags' }
+          - { entity: 'Media', label: 'Media' }
+      - { entity: 'Bubbles', label: 'Burbujas' }
+      - { entity: 'Publications', label: 'Publicaciones' }
+      - { entity: 'Software', label: 'Software' }
+
+  entities:
+    AboutMe:
+      class: App\Entity\AboutMe
+      label: Sobre mí
+      disabled_actions: ['new', 'delete']
+      list:
+        fields:
+          - { property: 'descriptionEs', label: 'Descripción español' }
+          - { property: 'descriptionEn', label: 'Descripción inglés' }
+      form:
+        fields:
+          - { property: 'descriptionEs', label: 'Descripción español', type: 'textarea' }
+          - { property: 'descriptionEn', label: 'Descripción inglés', type: 'textarea' }
+          - { property: 'abbreviated_cvFile', label: 'CV abreviado',  type: 'vich_file', base_path: '%app.path.cv%' }
+          - { property: 'completed_cvFile', label: 'CV completo',  type: 'vich_file', base_path: '%app.path.cv%' }
+          - { property: 'citations', label: 'Google Scholar URL',  type: 'text'}
+
+    YearData:
+      class: App\Entity\YearData
+      label: Datos del año
+      disabled_actions: ['new', 'delete']
+      list:
+        fields:
+          - { property: 'pubishedArticles', label: 'Articulos publicados' }
+          - { property: 'hIndex', label: 'Índice H WoS' }
+          - { property: 'citations', label: 'Citaciones WoS' }
+          - { property: 'tesis', label: 'Tesis Doctorales dirigidas' }
+      form:
+        fields:
+          - { property: 'pubished_articles', label: 'Articulos publicados'}
+          - { property: 'h_index', label: 'Índice H WoS' }
+          - { property: 'citations', label: 'Citaciones WoS' }
+          - { property: 'tesis', label: 'Tesis Doctorales dirigidas' }
+
+    CurrentProjects:
+      class: App\Entity\CurrentProjects
+      label: Proyectos en marcha
+      list:
+        fields:
+          - { property: 'titleEs', label: 'Título Español' }
+          - { property: 'titleEn', label: 'Título Inglés' }
+          - { property: 'img', type: 'image', base_path: '%app.path.projects_images%' }
+      form:
+        fields:
+          - { property: 'titleEs', label: 'Título Español'}
+          - { property: 'descriptionEs', label: 'Description Español', type: 'fos_ckeditor' }
+          - { property: 'titleEn', label: 'Título Inglés'}
+          - { property: 'descriptionEn', label: 'Description Inglés', type: 'fos_ckeditor' }
+          - { property: 'imgFile', label: 'Imagen',  type: 'vich_image', base_path: '%app.path.projects_images%' }
+
+    Notices:
+      class: App\Entity\Notice
+      label: Noticias
+      list:
+        fields:
+          - { property: 'descriptionEs', label: 'Título Español' }
+          - { property: 'descriptionEn', label: 'Título Inglés' }
+          - { property: 'img', type: 'image', base_path: '%app.path.notices_images%' }
+      form:
+        fields:
+          - { property: 'descriptionEs', label: 'Description Español', type: 'fos_ckeditor' }
+          - { property: 'descriptionEn', label: 'Description Inglés', type: 'fos_ckeditor' }
+          - { property: 'imgFile', label: 'Imagen',  type: 'vich_image', base_path: '%app.path.notices_images%' }
+
+    Media:
+      class: App\Entity\Media
+      label: Media
+      list:
+        fields:
+          - { property: 'url', label: 'Iframe Youtube', template: 'admin/youtubeUrl.html.twig' }
+          - { property: 'urlOtro', label: 'Iframe General', type: 'raw' }
+          - { property: 'tag', label: 'Tag' }
+          - { property: 'img', type: 'image', base_path: '%app.path.media_images%' }
+      form:
+        fields:
+          - { property: 'url', label: 'URL Youtube', type: 'text' }
+          - { property: 'urlOtro', label: 'Iframe general', type: 'text' }
+          - { property: 'tag', label: 'Tags asociados'}
+          - { property: 'titulo', label: 'Titulo periodico', type: 'text' }
+          - { property: 'revista', label: 'Nombre periodico', type: 'text' }
+          - { property: 'urlNoticia', label: 'Url de la noticia', type: 'text' }
+          - { property: 'imgFile', label: 'Imagen',  type: 'vich_image', base_path: '%app.path.media_images%' }
+
+    Tags:
+      class: App\Entity\MediaTags
+      label: Media tags
+      list:
+        fields:
+          - { property: 'name', label: 'Nombre' }
+      form:
+        fields:
+          - { property: 'name', label: 'Nombre' }
+
+    Bubbles:
+      class: App\Entity\Bubbles
+      label: Burbujas
+      list:
+        fields:
+          - { property: 'titulo', label: 'Título' }
+      form:
+        fields:
+          - { property: 'titulo', label: 'Título' }
+          - { property: 'text', label: 'Texto', type: 'fos_ckeditor' }
+    Publications:
+      class: App\Entity\Publications
+      label: Publicaciones
+      list:
+        fields:
+          - { property: 'type', label: 'Tipo' }
+          - { property: 'title', label: 'Título' }
+      form:
+        fields:
+          - { property: 'title', label: 'Título' }
+          - { property: 'fileFile', label: 'Archivo',  type: 'vich_file', base_path: '%app.path.publication_files%' }
+
+    Software:
+      class: App\Entity\Software
+      label: Software
+      list:
+        fields:
+          - { property: 'name', label: 'Nombre' }
+          - { property: 'descriptionEs', label: 'Descripción' }
+          - { property: 'img', type: 'image', base_path: '%app.path.software_images%' }
+      form:
+        fields:
+          - { property: 'name', label: 'Nombre' }
+          - { property: 'descriptionEs', label: 'Descripción Español', type: 'fos_ckeditor' }
+          - { property: 'descriptionEn', label: 'Descripción Inglés', type: 'fos_ckeditor' }
+          - { property: 'url', label: 'URL de la web' }
+          - { property: 'imgFile', label: 'Imagen',  type: 'vich_image', base_path: '%app.path.software_images%' }

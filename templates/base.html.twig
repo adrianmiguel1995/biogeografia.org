@@ -1,12 +1,93 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Biogeografia.org,Biogeografia,Biogeography,Biodiversity,Biodiversidad,Biologia,Biology,Ciencias,Naturales,Jorge Lobo,Jorge M Lobo,Lobo,Jorge,Miguel Lobo,CSIC,Museo Nacional,Ciencias Naturales,Madrid,Escarabajos,Beetles" name="keywords">
+        <meta content="Página personal Jorge Miguel Lobo investigador del CSIC en el departamento de Biodiversidad y Biología Evolutiva" name="description">
+        <meta name="author" content="Adrian Miguel Blanco">
+        <link href="{{ asset('img/favicon.png') }}" rel="icon">
+        <link href="{{ asset('img/favicon.png') }}" rel="favicon">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Poppins:300,400,500,700" rel="stylesheet">
+        <link href="{{ asset('lib/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+    {% block header %}
+        <header id="header">
+            <div class="container">
+
+                <div id="logo" class="pull-left">
+                    <a href="{{ path("index")}}"><img id="imglogo" src="{{ asset('img/logo.png') }}" alt="" title="" /></a>
+                </div>
+
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li class="menu-active"><a href="#hero">Index</a></li>
+                        <li><a href="{{ path("publications") }}">{% trans %}Publicaciones{% endtrans %}</a></li>
+                        <li><a href="#projects">{% trans %}Proyectos en marcha{% endtrans %}</a></li>
+                        <li><a href="#media">{% trans %}Media{% endtrans %}</a></li>
+                        <li><a href="{{ path("beetles")}}">{% trans %}Escarabajos{% endtrans %}</a></li>
+                        <li><a href="{{ path("software") }}">{% trans %}Software{% endtrans %}</a>
+                        </li>
+                        <li><a href="#bubbles">{% trans %}Burbujas{% endtrans %}</a></li>
+                        <li class="menu-has-children" id="trans"> <a>{% trans %}Translate{% endtrans %}</a><i class="fas fa-chevron-down"></i>
+                            <ul>
+                                <li><a href="{{ path("translate") }}">{% trans %}English{% endtrans %}</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    {% endblock %}
+
         {% block body %}{% endblock %}
+
+    {% block footer %}
+        <footer id="footer">
+            <div class="row">
+                <div class="container col-lg-1 col-md-3 col-sm-2 wow fadeInRight">
+                    Created By: <strong>Adrián Miguel Blanco</strong>.<br> LinkedIn: <a href="http://www.linkedin.com/in/adrian-miguel-blanco"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="container col-lg-1 col-md-1 col-sm-1 wow fadeInUp">
+                    <a href="http://www.mncn.csic.es/Menu/Investigacion/Serviciodeapoyoalainvestigacin/LabBiogeografiaInformatica/seccion=1258&idioma=es_ES.do"> Lab Biogeografia informática</a>
+                </div>
+                <div class="container col-lg-2 col-md-2 col-sm-1 wow fadeInUp">
+                    <a href="https://scholar.google.es/citations?hl=en&user=fGee3OQAAAAJ&pagesize=66"> Grupo de investigación Biogeografía Ecológica Integrativa</a>
+                </div>
+                <div class="container col-lg-1 col-md-1 col-sm-1 wow fadeInUp">
+                    <a href="http://www.mncn.csic.es/index.jsp"> <img src="{{ asset('img/logomncn.png') }}" width="100px"></a>
+                </div>
+                <div class="container col-lg-1 col-md-1 col-sm-1 wow fadeInUp">
+                    <a href="http://www.ipez.es/rwizard/"> <img src="{{ asset('img/logoRWizard.png') }}" width="100px"></a>
+                </div>
+                <div class="container col-lg-1 col-md-1 col-sm-1 wow fadeInUp">
+                    <a href="http://www.ipez.es/modestr/"> <img src="{{ asset('img/logoModestR.png') }}" width="100px"></a>
+                </div>
+                <div class="container col-lg-1 col-md-1 col-sm-1 wow fadeInUp">
+                    <a href="http://www.observatoriosostenibilidad.com/"> <img src="{{ asset('img/logoOse.png') }}" width="100px"></a>
+                </div>
+            </div>
+        </footer>
+    {% endblock %}
+
+        {#<script src="lib/jquery/jquery.min.js"></script>#}
+        <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('lib/jquery/jquery-migrate.min.js') }}"></script>
+        <script src="{{ asset('lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
+        <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLHwG1PjyBKgJhfrm-O66sACcd5I5jD_4"></script>
+        <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
+        <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
+        <script src="{{ asset('lib/superfish/hoverIntent.js') }}"></script>
+        <script src="{{ asset('lib/superfish/superfish.min.js') }}"></script>
+        {#<script src="contactform/contactform.js"></script>#}
+        {#<script src="/js/main.js"></script>#}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

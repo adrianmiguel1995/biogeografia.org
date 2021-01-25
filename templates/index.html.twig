@@ -1,0 +1,273 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+{% block body %}
+    <section id="hero">
+        <div class="hero-container">
+            <h1>{% trans %}Biogeografia{% endtrans %}</h1>
+            <h2>It is only Biogeography... or something like this</h2>
+        </div>
+    </section>
+
+    <main id="main">
+        <section id="about">
+            <div class="container">
+                <div class="row about-container">
+
+                    <div class="col-lg-6 content order-lg-1 order-2">
+                        <h2 class="title">{% trans %}Sobre mi{% endtrans %}</h2>
+                        <p>
+                            {{ aboutMe.description }}
+
+                        </p>
+                        <div class="icon-box wow fadeInUp">
+                            <div class="icon"><a href="cv/{{ abbreviated_cv }}" target="_blank"><i class="far fa-file-pdf"></i></a></div>
+                            <h4 class="title"><a href="cv/{{ abbreviated_cv }}" target="_blank">{% trans %}cv abreviado{% endtrans %}</a></h4>
+                            <p class="description">{% trans %}Descargar Curriculum Vitae abreviado{% endtrans %}</p>
+                        </div>
+                        <div class="icon-box wow fadeInUp" data-wow-delay="0.2s">
+                            <div class="icon"><a href="cv/{{ completed_cv }}" target="_blank"><i class="far fa-file-pdf"></i></a></div>
+                            <h4 class="title"><a href="cv/{{ completed_cv }}" target="_blank">{% trans %}cv completo{% endtrans %}</a></h4>
+                            <p class="description">{% trans %}Descargar Curriculum Vitae completo{% endtrans %}</p>
+                        </div>
+                        <div class="icon-box wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="icon"><a href="{{ aboutMe.citations }}" target="_blank"><i class="far fa-chart-bar"></i></a></div>
+                            <h4 class="title"><a href="{{ aboutMe.citations }}" target="_blank">{% trans %}Citaciones{% endtrans %}</a></h4>
+                            <p class="description">{% trans %}Pagina de Google Scholar{% endtrans %}</p>
+                        </div>
+                    </div>
+                    <div id="fotoprincipal" class="col-lg-6 background order-lg-2 order-1 wow fadeInRight"></div>
+                </div>
+            </div>
+        </section>
+        <section id="facts">
+            <div class="container wow fadeIn">
+                <div class="section-header">
+                    <h3 class="section-title">{% trans %}Datos{% endtrans %}</h3>
+                    <p class="section-description">{% trans %}Año{% endtrans %} {{ "now"|date("Y") }}</p>
+                </div>
+                <div class="row counters">
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-toggle="counter-up">{{ yearData.pubishedArticles }}</span>
+                        <p>{% trans %}Articulos publicados{% endtrans %}</p>
+                    </div>
+
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-toggle="counter-up">{{ yearData.hIndex }}</span>
+                        <p>{% trans %}Índice H WoS{% endtrans %}</p>
+                    </div>
+
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-toggle="counter-up">{{ yearData.citations }}</span>
+                        <p>{% trans %}Citaciones WoS{% endtrans %}</p>
+                    </div>
+
+                    <div class="col-lg-3 col-6 text-center">
+                        <span data-toggle="counter-up">{{ yearData.tesis }}</span>
+                        <p>{% trans %}Tesis Doctorales dirigidas{% endtrans %}</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <section id="projects">
+            <div class="container wow fadeIn">
+                <div class="section-header">
+                    <h3 class="section-title">{% trans %}Proyectos en marcha{% endtrans %}</h3>
+                    <p class="section-description">{% trans %}Proyectos que se estan llevando a cabo actualmente{% endtrans %}</p>
+                </div>
+                <div class="row">
+                    {% for key,item in currentProjects %}
+                    <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="box">
+                            <div class="icon"><a href="{{ path("projects") }}#proy{{ key }}"><i class="far fa-newspaper"></i></a></div>
+                            <h4 class="title"><a href="{{ path("projects") }}#proy{{ key }}">{{ item.title }}</a></h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </section>
+        <section id="call-to-action">
+            <div class="container wow fadeIn">
+                <div class="row">
+                    <div class="col-lg-12 text-center text-lg-left">
+                        <div id="carrouselLobo" class="carousel slide" data-ride="carousel">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-12 align-self-center text-center text-lg-left">
+                                    <h2>{% trans %}Noticias{% endtrans %}</h2>
+                                    <ol class="carousel-indicators">
+                                        {% for key,item in news %}
+                                            {% if key == 0 %}
+                                                <li data-target="#carrouselLobo" data-slide-to="{{ key }}" class="active"></li>
+                                            {% else %}
+                                                <li data-target="#carrouselLobo" data-slide-to="{{ key }}"></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        {% for key,item in news %}
+                                            {% if key == 0 %}
+                                                <div class="carousel-item active">
+                                                    <div class="row">
+                                                        <div class="col-lg-8">
+                                                                {{ item.description | raw }}
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <img src="{{ asset("uploads/images/notices/") }}{{ item.img }}" style="width: 100%;">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            {% else %}
+                                                <div class="carousel-item">
+                                                    <div class="row">
+                                                        <div class="col-lg-8">
+                                                            {{ item.description | raw }}
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <img src="{{ asset("uploads/images/notices/") }}{{ item.img }}" style="width: 100%;">
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <section id="media">
+            <div class="container wow fadeInUp">
+                <div class="section-header">
+                    <h3 class="section-title">{% trans %}Media{% endtrans %}</h3>
+                    <p class="section-description">{% trans %}Diferentes vídeos y articulos de prensa en los que aparezco{% endtrans %}</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <ul id="media-flters">
+                            {% for key,item in mediaTags %}
+                                {% if key == 0 %}
+                                    <li data-filter=".filter-{{ item.name|replace({ (' '): '' })  }}" class="filter-active">{{ item.name }}</li>
+                                {% else %}
+                                    <li data-filter=".filter-{{ item.name|replace({ (' '): '' })  }}">{{ item.name }}</li>
+                                {% endif %}
+                            {% endfor %}
+                            {#<li data-filter=".filter-I3B, .filter-Europa, .filter-InfSem, .filter-Prensa">Todos</li>#}
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="row" id="media-wrapper">
+                    {% for key,item in media %}
+                        <div class="col-lg-6 col-md-12 media-item filter-{{ item.tag.name|replace({ (' '): '' })  }}">
+                            {% if item.url != null %}
+                                {% set v = item.url|slice(-11, 11) %}
+                                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/{{ v }}" frameborder="0" allowfullscreen></iframe>
+                            {% elseif item.urlOtro != null%}
+                                {{ item.urlOtro | raw }}
+                            {% elseif item.img != null %}
+                                <a href="{{ item.urlNoticia }}" target="_blank">
+                                    <img src="{{ asset('uploads/images/media/') }}{{ item.img }}">
+                                    <div class="details">
+                                        <h4>{{ item.titulo }}</h4>
+                                        <span>{{ item.revista }}</span>
+                                    </div>
+                                </a>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <section id="bubbles">
+            <div class="container wow fadeInUp">
+                <div class="section-header">
+                    <h3 class="section-title">{% trans %}Burbujas{% endtrans %}</h3>
+                </div>
+                <div class="row">
+                    {% for item in bubbles %}
+                    <div class="col-lg-6 col-md-6">
+                        <div class="member">
+                            <div class="pic pic1"><button data-toggle="modal" data-target="#BurbujaModal" data-titulo="{{ item.titulo }}" data-poema="{{ item.text }}"><img src="{{ asset("img/burbuja1.png") }}" id="bur1" class="wow fadeInUp" alt=""></button></div>
+                            <h4>{{ item.titulo }}</h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+        </section>
+        <div class="modal fade" id="BurbujaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="poema">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section id="contact">
+            <div class="container wow fadeInUp">
+                <div class="section-header">
+                    <h3 class="section-title">{% trans %}Contacto{% endtrans %}</h3>
+                    <p class="section-description">{% trans %}¿Quieres contactar conmigo? Aquí te dejo lo que necesitas saber{% endtrans %}</p>
+                </div>
+            </div>
+
+            <div id="google-map" data-latitude="40.4412583" data-longitude="-3.6901928"></div>
+
+            <div class="container wow fadeInUp">
+                <div class="row justify-content-center">
+
+                    <div class="col-lg-3 col-md-4">
+
+                        <div class="info">
+                            <div>
+                                <i class="fa fa-map-marker"></i>
+                                <p>Calle de José Gutiérrez Abascal<br>2, 28006 Madrid</p>
+                            </div>
+
+                            <div>
+                                <i class="fa fa-envelope"></i>
+                                <p>Jorge.Lobo@mncn.csic.es</p>
+                            </div>
+
+                            <div>
+                                <i class="fa fa-phone"></i>
+                                <p>+34 914 11 13 28</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+
+ {% block javascripts %}
+     {{ encore_entry_script_tags('app') }}
+        <script>
+            $(document).ready(function(){
+                $(".filter-{{ mediaTags[0].name|replace({ (' '): '' })  }}").fadeIn(100).css('transform', 'scale(1)');
+            });
+
+        </script>
+ {% endblock %}
+
+

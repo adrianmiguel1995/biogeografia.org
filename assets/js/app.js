@@ -1,0 +1,202 @@
+/*
+ * Welcome to your app's main JavaScript file!
+ *
+ * We recommend including the built version of this JavaScript file
+ * (and its CSS file) in your base layout (base.html.twig).
+ */
+
+// any CSS you import will output into a single css file (app.css in this case)
+import '../css/app.css';
+
+// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
+import $ from 'jquery';
+
+jQuery(document).ready(function( $ ) {
+
+    // Header fixed and Back to top button
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 100) {
+            $('.back-to-top').fadeIn('slow');
+            $('#header').addClass('header-fixed');
+            $(".nav-menu a").css("color","black");
+            $(".nav-menu #trans").css("color","black");
+            $("#imglogo").attr("src","./../img/logo_dark.png")
+            $("#buscador").show();
+        } else {
+            $('.back-to-top').fadeOut('slow');
+            $('#header').removeClass('header-fixed');
+            $(".nav-menu a").css("color","#fff");
+            $(".nav-menu #trans").css("color","#fff");
+            $(".nav-menu #trans ul li a").css("color","black");
+            $("#buscador").hide();
+            $("#imglogo").attr("src","./../img/logo.png")
+        }
+    });
+    $('.back-to-top').click(function(){
+        $('html, body').animate({scrollTop : 0},1500, 'easeInOutExpo');
+        return false;
+    });
+
+    // Initiate the wowjs
+    new WOW().init();
+
+    // Initiate superfish on nav menu
+    $('.nav-menu').superfish({
+        animation: {opacity:'show'},
+        speed: 400
+    });
+
+    // Mobile Navigation
+    if( $('#nav-menu-container').length ) {
+        var $mobile_nav = $('#nav-menu-container').clone().prop({ id: 'mobile-nav'});
+        $mobile_nav.find('> ul').attr({ 'class' : '', 'id' : '' });
+        $('body').append( $mobile_nav );
+        $('body').prepend( '<button type="button" id="mobile-nav-toggle"><i class="fas fa-bars"></i></button>' );
+        $('body').append( '<div id="mobile-body-overly"></div>' );
+        $('#mobile-nav').find('.menu-has-children').prepend('<i class="fas fa-chevron-down"></i>');
+
+        $(document).on('click', '.menu-has-children i', function(e){
+            $(this).next().toggleClass('menu-item-active');
+            $(this).nextAll('ul').eq(0).slideToggle();
+            $(this).toggleClass("fa-chevron-up fa-chevron-down");
+        });
+
+        $(document).on('click', '#mobile-nav-toggle', function(e){
+            $('body').toggleClass('mobile-nav-active');
+            $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
+            $('#mobile-body-overly').toggle();
+        });
+
+        $(document).click(function (e) {
+            var container = $("#mobile-nav, #mobile-nav-toggle");
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                if ( $('body').hasClass('mobile-nav-active') ) {
+                    $('body').removeClass('mobile-nav-active');
+                    $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
+                    $('#mobile-body-overly').fadeOut();
+                }
+            }
+        });
+    } else if ( $("#mobile-nav, #mobile-nav-toggle").length ) {
+        $("#mobile-nav, #mobile-nav-toggle").hide();
+    }
+
+    // Smoth scroll on page hash links
+    $('a[href*="#"]:not([href="#"])').on('click', function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+
+            var target = $(this.hash);
+            if (target.length) {
+                var top_space = 0;
+
+                if( $('#header').length ) {
+                    top_space = $('#header').outerHeight();
+
+                    if( ! $('#header').hasClass('header-fixed') ) {
+                        top_space = top_space - 20;
+                    }
+                }
+
+                $('html, body').animate({
+                    scrollTop: target.offset().top - top_space
+                }, 1500, 'easeInOutExpo');
+
+                if ( $(this).parents('.nav-menu').length ) {
+                    $('.nav-menu .menu-active').removeClass('menu-active');
+                    $(this).closest('li').addClass('menu-active');
+                }
+
+                if ( $('body').hasClass('mobile-nav-active') ) {
+                    $('body').removeClass('mobile-nav-active');
+                    $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
+                    $('#mobile-body-overly').fadeOut();
+                }
+                return false;
+            }
+        }
+    });
+
+
+    $(".media-item").fadeOut().css('transform', 'scale(0)');
+    $("#media-wrapper").fadeTo(300, 1);
+
+    // Porfolio filter
+    $("#media-flters li").click ( function() {
+        $("#media-flters li").removeClass('filter-active');
+        $(this).addClass('filter-active');
+
+        var selectedFilter = $(this).data("filter");
+        console.log(selectedFilter);
+        $("#media-wrapper").fadeTo(100, 0);
+
+        $(".media-item").fadeOut().css('transform', 'scale(0)');
+
+        setTimeout(function() {
+            $(selectedFilter).fadeIn(100).css('transform', 'scale(1)');
+            $("#media-wrapper").fadeTo(300, 1);
+        }, 300);
+    });
+
+    // jQuery counterUp
+    $('[data-toggle="counter-up"]').counterUp({
+        delay: 10,
+        time: 1000
+    });
+
+
+    //Google Map
+    var get_latitude = $('#google-map').data('latitude');
+    var get_longitude = $('#google-map').data('longitude');
+
+    function initialize_google_map() {
+        var myLatlng = new google.maps.LatLng(get_latitude, get_longitude);
+        var mapOptions = {
+            zoom: 14,
+            scrollwheel: false,
+            center: myLatlng
+        };
+        var map = new google.maps.Map(document.getElementById('google-map'), mapOptions);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize_google_map);
+
+// custom code
+
+    $(".pic1 button").hover(function(){
+        $(this).find('img').attr("src","./../img/burbuja1_despues.png");
+    });
+    $(".pic1 button").on("mouseout",function(){
+        $(this).find('img').attr("src","./../img/burbuja1.png");
+    });
+
+    // $("#pic2 button").hover(function(){
+    //     $("#bur2").attr("src","./../img/burbuja2_despues.png");
+    // });
+    // $("#pic2 button").on("mouseout",function(){
+    //     $("#bur2").attr("src","./../img/burbuja2.png");
+    // });
+
+
+
+    $('#BurbujaModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var recipient = button.data('poema');
+        var titulo = button.data('titulo');
+        var modal = $(this);
+        modal.find('.modal-title').text(titulo);
+        modal.find('#poema').html(recipient)
+    })
+
+    $("#fotoprincipal").on("mouseenter",function(){
+        $("#fotoprincipal").css("background","url(../img/about-img2.png) center top no-repeat");
+    });
+    $("#fotoprincipal").on("mouseout",function(){
+        $("#fotoprincipal").css("background","url(../img/about-img.jpg) center top no-repeat");
+    });
+
+
+});
+

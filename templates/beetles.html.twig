@@ -1,0 +1,71 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('beetles') }}
+{% endblock %}
+{% block header %}
+    <header id="header">
+        <div class="container">
+            <div id="logo" class="pull-left">
+                <a href="{{ path("index") }}"><img id="imglogo" src="{{ asset('img/logo.png') }}" alt="" title="" /></a>
+            </div>
+
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li><a href="{{ path("index") }}">{% trans %}Vuelta al Index{% endtrans %}</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+{% endblock %}
+{% block body %}
+    <section id="about" class="m1">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6" style="text-align: center;">
+                    <h2 class="wow fadeInDown">{% trans %}ESCARABAJOS{% endtrans %}</h2><img src="{{ asset("img/escarabajo.png") }}" alt="" width="100px" class="wow fadeInDown">
+                </div>
+            </div>
+            <div class="row" id="escara">
+                <div class="col-lg-12 content order-lg-1 order-2 wow fadeInUp">
+                    <h5>
+                        {% trans %}Desde mis inicios como investigador, estoy interesado en la biogeografía, la ecología y la biología evolutiva de los escarabajos coprófagos. Estudio los patrones y procesos de distribución de estas especies desde una perspectiva macroecológica, el manejo de información sobre biodiversidad, la ecología de este grupo y su biología de conservación.{% endtrans %}
+
+                    </h5>
+                </div>
+            </div>
+            <div class="datos wow fadeInUp">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>
+                            {% trans %}Acceso a{% endtrans %} <a href="{{ asset("descargar/exportacion_bandasca_febrero_2006.xls") }}">BANDASCA</a>, {% trans %} base de datos de los Scarabaeidae coprófagos de la Península ibérica e islas baleares, también disponible en GBIF.{% endtrans %}
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>
+                            {% trans %}Acceso a la base de datos sobre el género Eurysternus en{% endtrans %} <a href="{{ asset("descargar/Eurysternus_Data_Base_mayo_2012.xls") }}">América</a> {% trans %}y en{% endtrans %} <a href="{{ asset("descargar/DataBase_Colombia.xls") }}">Colombia</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>
+                             {% trans %}Información Taxonómica y Biogeográfica sobre los Scarabaeoidea coprófagos de{% endtrans %} <a href="{{ path("moreInfo") }}">{% trans %}Marruecos{% endtrans %}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+ {% block javascripts %}
+     {{ encore_entry_script_tags('beetles') }}
+ {% endblock %}
+
+

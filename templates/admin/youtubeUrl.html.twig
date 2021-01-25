@@ -1,0 +1,4 @@
+{% if value != null %}
+{% set v = value|slice(-11, 11) %}
+<iframe width="350" height="197" src="https://www.youtube.com/embed/{{ v }}" frameborder="0" allowfullscreen></iframe>
+{% endif %}

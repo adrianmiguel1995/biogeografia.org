@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('software') }}
+{% endblock %}
+{% block header %}
+    <header id="header">
+        <div class="container">
+
+            <div id="logo" class="pull-left">
+                <a href="{{ path("index") }}"><img id="imglogo" src="{{ asset("img/logo.png") }}" alt="" title="" /></a>
+            </div>
+
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li><a href="{{ path("index") }}#hero">{% trans %}Vuelta al Index{% endtrans %}</a></li>
+                    <li><a href="#{{ names[0].name }}">{{ names[0].name }}</a></li>
+                    <li><a href="#{{ names[1].name }}">{{ names[1].name }}</a></li>
+                    <li><a href="#{{ names[2].name }}">{{ names[2].name }}</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+{% endblock %}
+{% block body %}
+
+<section id="hero">
+    <div class="hero-container">
+        <h1>{% trans %}SOFTWARE{% endtrans %}</h1>
+    </div>
+</section>
+
+<main id="main">
+    {% for item in software %}
+        <section class="about" id="{{ item.name }}">
+            <div class="container">
+                <div class="row about-container">
+                    <div class="col-lg-6 content order-lg-1 order-2">
+                        <h2 class="title">{{ item.name }}</h2>
+
+                        {{ item.descriptionEs | raw }}
+
+                        <div class="icon-box wow fadeInUp">
+                            <div class="icon"><a href="{{ item.url }}" target="_blank"><i class="fas fa-at"></i></a></div>
+                            <h4 class="title"><a href="{{ item.url }}" target="_blank">{% trans %}Página Web{% endtrans %}</a></h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 background software order-lg-2 order-1 wow fadeInUp"
+                         style=" background: url({{ asset("uploads/images/software/") }}{{ item.img }}) center no-repeat;"></div>
+                </div>
+            </div>
+        </section>
+    {% endfor %}
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+ {% block javascripts %}
+     {{ encore_entry_script_tags('app') }}
+ {% endblock %}
+
+

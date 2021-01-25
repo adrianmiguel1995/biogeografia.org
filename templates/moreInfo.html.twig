@@ -1,0 +1,98 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('beetles') }}
+{% endblock %}
+{% block header %}
+    <header id="header">
+        <div class="container">
+            <div id="logo" class="pull-left">
+                <a href="{{ path("index") }}"><img id="imglogo" src="{{ asset('img/logo.png') }}" alt="" title="" /></a>
+            </div>
+
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li><a href="{{ path("index") }}">{% trans %}Vuelta al Index{% endtrans %}</a></li>
+                    <li><a href="{{ path("beetles") }}">{% trans %}Escarabajos{% endtrans %}</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+{% endblock %}
+{% block body %}
+    <section id="about" class="m2">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6" style="text-align: center;">
+                    <h2 class="wow fadeInDown">{% trans %}ESCARABAJOS{% endtrans %}</h2><img src="{{ asset("img/escarabajo.png") }}" alt="" width="100px" class="wow fadeInDown" id="logoes">
+                </div>
+            </div>
+            <div class="row" id="escara">
+                <div class="col-lg-12 content order-lg-1 order-2 wow fadeInUp">
+                    <h5>
+                        {% trans %}El objetivo básico de este proyecto es el de compilar la información taxonómica y corológica contenida en la bibliografía (más de 100 referencias), diversas colecciones particulares y la colección del Museo Nacional de Ciencias Naturales de Madrid sobre los coleópteros coprófagos pertenecientes a la superfamilia Scarabaeoidea en Marruecos. En esta página ofrecemos gratuitamente esta base de datos (alrededor de 10.000 registros) y diversa información suplementaria, así como cartografía SIG del país.{% endtrans %}
+                    </h5>
+                </div>
+            </div>
+            <div class="datos wow fadeInUp">
+                <div class="row">
+                    <div class="col-lg-5 col-md-5">
+                        <ul>
+                            <li>
+                                <h3>{% trans %}Para Descargar{% endtrans %}</h3>
+                            <li>
+                                <b><a href="{{ asset("descargar/listado_especies.pdf") }}" target="_blank">{% trans %}Listado de especies{% endtrans %}</a></b>
+                            </li>
+                            <li>
+                                <b><a href="{{ asset("descargar/listados_referencias.pdf") }}" target="_blank">{% trans %}Listado de referencias y colecciones incorporadas{% endtrans %}</a></b>
+                            </li>
+                            <li>
+                                <b><a href="{{ asset("descargar/Base_de_datos_Marruecos.xls") }}" target="_blank">{% trans %}Base de datos completa{% endtrans %}</a></b>
+                            </li>
+                            <li>
+                                <b><a href="{{ asset("descargar/Marruecos_localidades.xls") }}" target="_blank">{% trans %}Localidadaes de Marruecos georreferenciadas{% endtrans %}</a></b>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="offset-lg-1 col-lg-5 col-md-5">
+                        <ul>
+                            <li>
+                                <h3>{% trans %}Participantes{% endtrans %}</h3>
+                            <li>
+                            <li>
+                                <b><a href="https://scholar.google.com/citations?user=3tcKGCcAAAAJ" target="_blank">Jorge M. Lobo</a></b>
+                            </li>
+                            <li>
+                                <b><a href="https://scholar.google.es/citations?user=4wlYf6QAAAAJ" target="_blank">Francisco Cabrero-Sañudo</a></b>
+                            </li>
+                            <li>
+                                <b><a href="https://www.researchgate.net/profile/Jesus_Samper" target="_blank">Jesús Romero Samper</a></b>
+                            </li>
+                            <li>
+                                <b>José Luís Ruiz</b>
+                            </li>
+                            <li>
+                                <b><a href="https://scholar.google.com/citations?user=QgGH0HIAAAAJ&hl=en" target="_blank">Joaquín Hortal Muñoz</a></b>
+                            </li>
+                            <li>
+                                <b><a href="https://www.researchgate.net/profile/Marco_Dellacasa" target="_blank">Marco Dellacasa</a></b>
+                            </li>
+                            <li>
+                                <b><a href="https://www.researchgate.net/profile/Giovanni_Dellacasa" target="_blank">Giovanni Dellacasa</a></b>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+ {% block javascripts %}
+     {{ encore_entry_script_tags('beetles') }}
+ {% endblock %}
+
+

@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('publications') }}
+{% endblock %}
+
+{% block header %}
+    <header id="header">
+        <div class="container">
+            <div id="logo" class="pull-left">
+                <a href="{{ path("index") }}"><img id="imglogo" src="{{ asset('img/logo.png') }}" alt="" title="" /></a>
+            </div>
+
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li><a href="{{ path("index") }}">{% trans %}Vuelta al Index{% endtrans %}</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+{% endblock %}
+
+{% block body %}
+    <section id="hero">
+        <div class="hero-container">
+            <h1>{% trans %}Publicaciones{% endtrans %}</h1>
+        </div>
+    </section>
+
+    <main id="main">
+        <div id="error" style="display: none;">
+            <h1>NO HAY NINGUNA PUBLICACIÓN QUE COINCIDA CON SUS CRITERIOS DE BUSQUEDA</h1>
+        </div>
+        <ol id="listaPublicaciones">
+            <li >
+                <h1>{% trans %}PUBLICACIONES EN REVISTAS DE IMPACTO{% endtrans %}</h1><h2><a href="#otrasPublicaciones">{% trans %}OTRAS PUBLICACIONES{% endtrans %}</a></h2>
+            </li>
+            {% for key,item in publications_principal %}
+
+            <li class="item">
+                <p><a href="{{ asset("trabajospdf/") }}{{ item.file }}" target="_blank">
+                        <span class="numero">{{ count_principal - key }}.-</span>{{ item.title }}</a>
+                </p>
+
+            </li>
+            {% endfor %}
+
+            <li >
+                <h1 id="otrasPublicaciones">OTRAS PUBLICACIONES</h1>
+            </li>
+            {% for key,item in publications_other %}
+
+                <li class="item">
+                    <p><a href="{{ asset("trabajospdf/") }}{{ item.file }}" target="_blank">
+                            <span class="numero">{{ count_other - key }}.-</span>{{ item.title }}</a>
+                    </p>
+
+                </li>
+            {% endfor %}
+        </ol>
+    </main>
+
+
+{% endblock %}
+
+{% block footer %}
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+{% endblock %}
+
+
+
+ {% block javascripts %}
+     {{ encore_entry_script_tags('app') }}
+     {{ encore_entry_script_tags('publications') }}
+ {% endblock %}
+
+

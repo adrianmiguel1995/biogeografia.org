@@ -1,0 +1,51 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('projects') }}
+{% endblock %}
+{% block header %}
+    <header id="header">
+        <div class="container">
+            <div id="logo" class="pull-left">
+                <a href="{{ path("index") }}"><img id="imglogo" src="{{ asset('img/logo.png') }}" alt="" title="" /></a>
+            </div>
+
+            <nav id="nav-menu-container">
+                <ul class="nav-menu">
+                    <li><a href="{{ path("index") }}#projects">{% trans %}Vuelta al Index{% endtrans %}</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+{% endblock %}
+{% block body %}
+<section id="hero">
+    <div class="hero-container">
+        <h1>{% trans %}PROYECTOS EN MARCHA{% endtrans %}</h1>
+        <h2>{% trans %}Proyectos llevados a cabo actualmente{% endtrans %}</h2>
+    </div>
+</section>
+    <main id="main">
+        {% for key,item in projects %}
+        <section class="about" id="proy{{ key }}">
+            <div class="container">
+                <div class="row about-container">
+                    <div class="col-lg-6 content order-lg-1 order-2">
+                        <h4 class="title">{{ item.title }}</h4>
+
+                        {{ item.description | raw }}
+
+                    </div>
+                    <div class="col-lg-6 proy order-lg-2 order-1 wow fadeInRight" style="background: url({{ asset('uploads/images/projects/') }}{{ item.img }}) center no-repeat;"></div>
+                </div>
+            </div>
+        </section>
+        {% endfor %}
+    </main>
+
+{% endblock %}
+
+ {% block javascripts %}
+     {{ encore_entry_script_tags('projects') }}
+ {% endblock %}
+
+
